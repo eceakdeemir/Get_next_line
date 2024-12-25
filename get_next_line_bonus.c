@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecakdemi <ecakdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:25:40 by ecakdemi          #+#    #+#             */
-/*   Updated: 2024/12/25 14:37:12 by ecakdemi         ###   ########.fr       */
+/*   Updated: 2024/12/25 15:24:57 by ecakdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,21 @@ char	*read_and_fill_line(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[8192];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!buffer)
+	if (!buffer[fd])
 	{
-		buffer = malloc(sizeof(char) * 1);
-		if (!buffer)
+		buffer[fd] = malloc(sizeof(char) * 1);
+		if (!buffer[fd])
 			return (NULL);
-		buffer[0] = '\0';
+		buffer[fd][0] = '\0';
 	}
-	line = read_and_fill_line(fd, &buffer);
+	line = read_and_fill_line(fd, &buffer[fd]);
 	if (!line)
 		return (NULL);
-	buffer = remove_line(buffer, line);
+	buffer[fd] = remove_line(buffer[fd], line);
 	return (line);
 }
