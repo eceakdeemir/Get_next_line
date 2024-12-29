@@ -6,7 +6,7 @@
 /*   By: ecakdemi <ecakdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:25:40 by ecakdemi          #+#    #+#             */
-/*   Updated: 2024/12/25 15:24:57 by ecakdemi         ###   ########.fr       */
+/*   Updated: 2024/12/29 13:21:10 by ecakdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*read_and_fill_line(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[8192];
+	static char	*buffer[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
